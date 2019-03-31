@@ -2,18 +2,31 @@ const controller = {};
 
 controller.list = (req, res) => {
   req.getConnection((err, conn) => {
-    conn.query('SELECT * FROM customer', (err, customers) => {
+    conn.query('SELECT * FROM usuarios', (err, customers) => {
      if (err) {
-      res.json(err);
+        res.json(err);
      }
-     res.render('customers', {
+     res.json(customers);
+     /*res.render('customers', {
         data: customers
-     });
+     });*/
     });
   });
 };
 
-controller.save = (req, res) => {
+controller.user = (req, res) => {
+    const { id } = req.params;
+    req.getConnection((err, conn) => {
+      conn.query("SELECT * FROM usuarios WHERE Identidad = ?", [id], (err, user) => {
+        if (err) {
+            res.json(err);
+         }
+         res.json(user);
+      });
+    });
+  };
+
+/*controller.save = (req, res) => {
   const data = req.body;
   console.log(req.body)
   req.getConnection((err, connection) => {
@@ -39,7 +52,6 @@ controller.update = (req, res) => {
   const { id } = req.params;
   const newCustomer = req.body;
   req.getConnection((err, conn) => {
-
   conn.query('UPDATE customer set ? where id = ?', [newCustomer, id], (err, rows) => {
     res.redirect('/');
   });
@@ -53,6 +65,6 @@ controller.delete = (req, res) => {
       res.redirect('/');
     });
   });
-}
+}*/
 
 module.exports = controller;

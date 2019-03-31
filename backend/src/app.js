@@ -8,6 +8,7 @@ const app = express();
 
 // importing routes
 const customerRoutes = require('./routes/customer');
+const indexRoutes = require('./routes/index');
 
 // settings
 app.set('port', process.env.PORT || 3000);
@@ -19,14 +20,15 @@ app.use(morgan('dev'));
 app.use(myConnection(mysql, {
   host: 'localhost',
   user: 'root',
-  password: 'contraseña',
+  password: '',
   port: 3306,
-  database: 'crudnodejsmysql'
+  database: 'icook'
 }, 'single'));
 app.use(express.urlencoded({extended: false}));
 
 // routes
-app.use('/', customerRoutes);
+app.use('/api', customerRoutes);
+app.use('/', indexRoutes);
 
 // static files
 app.use(express.static(path.join(__dirname, 'public')));
