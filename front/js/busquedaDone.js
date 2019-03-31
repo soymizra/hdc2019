@@ -1,7 +1,18 @@
-var estrellas = document.getElementsByClassName("text-muted");
+const app = new Vue({
+    el: '#busqueda',
+    data:  {
+        titulo: 'Ensaladas'
+    }
+    ,
+    methods: {
+        traer(){
+            
+        }
+    },
+    computed: {
+        
+    },
 
-function colorStart(){
-    estrellas.style.color = "red";
-    console.log("sdfsd");
- }
-colorStart();
+
+
+})
