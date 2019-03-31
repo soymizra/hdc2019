@@ -1,10 +1,10 @@
 const router = require('express').Router();
 
-const customerController = require('../controllers/customerController');
+const apiController = require('../controllers/apiController');
 
-router.get('/users/', customerController.list);
-router.get('/users/:id', customerController.user);
-router.get('/users/:idTipoUsuario/:id', customerController.chef_platillos);
+router.get('/users/', apiController.list);
+router.get('/users/:id', apiController.user);
+router.get('/platillos/', apiController.platillos);
 
 //router.post('/add', customerController.save);
 /*router.get('/update/:id', customerController.edit);

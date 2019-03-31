@@ -7,7 +7,7 @@ const express = require('express'),
 const app = express();
 
 // importing routes
-const customerRoutes = require('./routes/customer');
+const apiRoutes = require('./routes/api');
 const indexRoutes = require('./routes/index');
 
 // settings
@@ -27,7 +27,7 @@ app.use(myConnection(mysql, {
 app.use(express.urlencoded({extended: false}));
 
 // routes
-app.use('/api', customerRoutes);
+app.use('/api', apiRoutes);
 app.use('/', indexRoutes);
 
 // static files

@@ -25,6 +25,16 @@ controller.user = (req, res) => {
       });
     });
   };
+  controller.platillos = (req, res) => {
+    req.getConnection((err, conn) => {
+      conn.query('SELECT * FROM platillos', (err, platillos) => {
+       if (err) {
+          res.json(err);
+       }
+       res.json(platillos);
+      });
+    });
+  };
 
 /*controller.save = (req, res) => {
   const data = req.body;
