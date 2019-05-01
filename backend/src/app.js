@@ -4,7 +4,18 @@ const express = require('express'),
       mysql = require('mysql'),
       myConnection = require('express-myconnection');
 
-const app = express();
+// conexion a la base de datos
+const db = require('./config/db');
+
+// import modelo
+require('./models/Proyectos');
+
+db.sync()
+    .then(() => console.log('Conectado al server'))
+    .catch(err => console.log('Error sequilize:'+err))
+
+
+      const app = express();
 
 // importing routes
 const apiRoutes = require('./routes/api');
@@ -17,13 +28,9 @@ app.set('view engine', 'ejs');
 
 // middlewares
 app.use(morgan('dev'));
-app.use(myConnection(mysql, {
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  port: 3306,
-  database: 'icook'
-}, 'single'));
+
+
+
 app.use(express.urlencoded({extended: false}));
 
 // routes
